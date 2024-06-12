@@ -6,9 +6,9 @@ let rx;
 let ry;
 let h = 3;
 let j = 0;
-let firstShapeX = 150;
+let firstShapeX = 250;
 let firstShapeY = 350;
-let secondShapeX = 19;
+let secondShapeX = 300;
 let secondShapeY = 600;
 let firstShapeSize = 600;
 let secondShapeSize = 400;
@@ -19,16 +19,16 @@ let cycle = [
   () => drawShape(),
   () => applyBlur(4),
   () => drawShape(),
-];
+  () => clip(mask),
+]
 
 let shapeColor;
 let shapeColor2;
 let color1;
+let mask;
 
 function preload() {
   font = loadFont("assets/NanumGothicCoding-Bold.ttf");
-  //font= loadFont('assets/SpaceMono-Regular.ttf')
-  //font= loadFont('assets/SpaceMono-Bold.ttf')
 }
 
 function shapetoPoint(x, y, size, sampleFactor) {
@@ -55,25 +55,27 @@ function setup() {
   msg = "*";
   rx = 4; //rect x
   ry = rx;
-  frameRate(6);
+  frameRate(100);
 }
 
 function draw() {
-  background(0);
+  background('black');
 
   blinking();
 
-  angle += 10;
+  erase();
+  textSize(560);
+  text("*", 290, 470);  
+  textSize(430);
+  text("*", 320, 710)
+  noErase();
 
   changeShapeColor();
 
-  fill(random(256), random(256), random(256), random(50, 200));
+  fill(random(256),random(256),random(256),random(50,200));
   noStroke();
-  circle(
-    random(mouseX - 80, mouseX + 80),
-    random(mouseY - 80, mouseY + 80),
-    random(10, 40)
-  );
+  circle(random(mouseX-80,mouseX+80),random(mouseY-80,mouseY+80),random(10,40));
+  
 }
 
 let drawOutline = () => {
@@ -89,6 +91,7 @@ let drawShape = () => {
   fill(91, 207, 231);
   shapetoPoint(secondShapeX, secondShapeY, secondShapeSize, sampleFactor);
 };
+
 let applyBlur = (strength) => {
   for (let i = 0; i < strength; i++) {
     filter(BLUR, 4);
@@ -112,41 +115,46 @@ function blinking() {
   } else {
     h++;
   }
+
+  angle += 10;
 }
 
 function changeShapeColor() {
-  textSize(430);
+  textSize(230);
   shapeColor = "rgb(243, 247, 0)";
   fill(shapeColor);
-  text("*", 36, 710);
+  text("*", 358, 595);
 
-  textSize(560);
+  textSize(420);
   shapeColor2 = "rgb(91,207,231)";
   fill(shapeColor2);
-  text("*", 194, 470);
-}
+  text("*", 318, 390);
+};
 
-function mouseMove() {
-  changeShapeColor();
+mask = () => {
+  fill('white');
+  circle(300, 350, 600, 600);
+};
 
-  shapeColor = color(random(256), random(256), random(256), random(50, 200));
-  noStroke();
-  circle(
-    random(mouseX - 80, mouseX + 80),
-    random(mouseY - 80, mouseY + 80),
-    random(10, 40)
-  );
-}
 
-////
-// function setup() {
-// 	createCanvas(windowWidth, windowHeight);
-// 	background(255);
-// }
+function starBounce()
+ {
 
-// function draw() {
-// 	fill(random(256),random(256),random(256),random(50,200));
-// 	noStroke()
-// 	circle(random(mouseX-80,mouseX+80),random(mouseY-80,mouseY+80),random(10,40));
 
-// }
+ }  
+
+//   clip(mask);
+
+
+//function mask() {
+  
+// circle(400, 400, 100, 100);
+// circle(200, 600, 200, 200);
+
+
+// rect(200,200,200,200,10)
+
+//  strokeWeight(10);
+// textSize(50)
+//}
+
