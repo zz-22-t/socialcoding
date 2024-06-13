@@ -30,7 +30,7 @@ let color1;
 let mask;
 
 function preload() {
-  font = loadFont("Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
+  font = loadFont('assets/NanumGothicCoding-Bold.ttf');
 }
 
 function shapetoPoint(x, y, size, sampleFactor) {
