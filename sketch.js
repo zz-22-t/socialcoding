@@ -22,13 +22,15 @@ let cycle = [
   () => clip(mask),
 ]
 
+var texts = [];
+
 let shapeColor;
 let shapeColor2;
 let color1;
 let mask;
 
 function preload() {
-  font = loadFont("assets/NanumGothicCoding-Bold.ttf");
+  font = loadFont("Open_Sans/OpenSans-VariableFont_wdth,wght.ttf");
 }
 
 function shapetoPoint(x, y, size, sampleFactor) {
@@ -60,6 +62,12 @@ function setup() {
 
 function draw() {
   background('black');
+
+  //this draws and updates the texts array
+  for(var i=0; i<texts.length; i++){
+    texts[i].display();
+    texts[i].move();
+  }
 
   blinking();
 
@@ -120,15 +128,15 @@ function blinking() {
 }
 
 function changeShapeColor() {
-  textSize(230);
-  shapeColor = "rgb(243, 247, 0)";
-  fill(shapeColor);
-  text("*", 358, 595);
+textSize(230);
+shapeColor = "rgb(243, 247, 0)";
+fill(shapeColor);
+text("*", 358, 595);
 
-  textSize(420);
-  shapeColor2 = "rgb(91,207,231)";
-  fill(shapeColor2);
-  text("*", 318, 390);
+// textSize(420);
+// shapeColor2 = "rgb(91,207,231)";
+// fill(shapeColor2);
+// text("*", 318, 390);
 };
 
 mask = () => {
@@ -137,11 +145,40 @@ mask = () => {
 };
 
 
-function starBounce()
- {
+function mouseClicked(){
+  texts.push(new TextObj(mouseX, mouseY));
+}
 
 
- }  
+
+function TextObj(theX, theY){
+  
+  
+  this.x = theX;
+  this.y = theY;
+  this.text = "p5js"
+  this.size = random(20, 50, 75);
+  
+  
+  //METHODS for the object
+  
+  //display() draws the object
+  this.display = function(){
+   	stroke('darkcyan');
+    strokeWeight(3);
+    // fill(random(256),random(256),random(256),random(50,200))
+    textSize(this.size);
+    text(this.text, this.x, this.y);
+  }
+  
+  //move() adds the textoject
+  this.move = function(){
+    this.x = this.x + random(-1, 1);
+    this.y = this.y + random(-1, 1);
+  }
+
+   
+}//end texts
 
 //   clip(mask);
 
@@ -157,4 +194,3 @@ function starBounce()
 //  strokeWeight(10);
 // textSize(50)
 //}
-
