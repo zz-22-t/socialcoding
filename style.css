@@ -1,8 +1,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: white;
-  
+  background-image: url('CB.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 canvas {
